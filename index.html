@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Team Manager</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Quản lý Cầu Thủ</h2>
+
+        <form id="playerForm">
+            <label for="player-name">Tên cầu thủ:</label>
+            <input type="text" id="player-name" placeholder="Nhập tên cầu thủ">
+          
+            <div class="position-container">
+              <input type="checkbox" id="goalkeeper" name="position" value="Thủ môn">
+              <label for="goalkeeper">Thủ môn</label>
+              
+              <input type="checkbox" id="forward" name="position" value="Tiền đạo">
+              <label for="forward">Tiền đạo</label>
+              
+              <input type="checkbox" id="defender" name="position" value="Hậu vệ">
+              <label for="defender">Hậu vệ</label>
+              
+              <input type="checkbox" id="midfielder" name="position" value="Trung vệ">
+              <label for="midfielder">Trung vệ</label>
+              
+              <input type="checkbox" id="winger" name="position" value="Tiền vệ">
+              <label for="winger">Tiền vệ</label>
+            </div>
+          
+            <button type="submit">Lưu Cầu Thủ</button>
+          </form>
+          
+
+        <table id="playerTable" class="player-table">
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Tên cầu thủ</th>
+                <th>Vị trí</th>
+                <th>ID</th>
+                <th>Hành động</th>
+              </tr>
+            </thead>
+            <tbody id="playerTableBody">
+              <!-- Danh sách cầu thủ sẽ được thêm vào đây -->
+            </tbody>
+          </table>
+          
+
+        <div class="form-group">
+            <button id="generateTeams">Generate Teams</button>
+        </div>
+
+        <div class="error" id="error"></div>
+
+        <div id="team-container">
+            <div class="team" id="teamA">
+                <h3>TeamA</h3>
+                <ul class="player-list">
+                    <!-- Danh sách cầu thủ Team A -->
+                </ul>
+            </div>
+            <div class="team" id="teamB">
+                <h3>TeamB</h3>
+                <ul class="player-list">
+                    <!-- Danh sách cầu thủ Team B -->
+                </ul>
+            </div>
+        </div>
+        
+        <div class="substitutes">
+            <h3>Substitutes</h3>
+            <ul class="player-list">
+                <!-- Danh sách cầu thủ dự bị -->
+            </ul>
+        </div>
+        
+    </div>
+    <button onclick="showPlayerStats()">Xem Thống Kê</button>
+    <div class="stats"></div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
