@@ -36,20 +36,20 @@
           </form>
           
 
-        <table id="playerTable" class="player-table">
+          <table id="playerTable" class="player-table">
             <thead>
-              <tr>
-                <th>STT</th>
-                <th>Tên cầu thủ</th>
-                <th>Vị trí</th>
-                <th>ID</th>
-                <th>Hành động</th>
-              </tr>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên cầu thủ</th>
+                    <th>Vị trí</th>
+                    <th>ID</th>
+                    <th>Hành động</th>
+                </tr>
             </thead>
             <tbody id="playerTableBody">
-              <!-- Danh sách cầu thủ sẽ được thêm vào đây -->
+                <!-- Danh sách cầu thủ sẽ được thêm vào đây -->
             </tbody>
-          </table>
+        </table>
           
 
         <div class="form-group">
@@ -81,9 +81,22 @@
         </div>
         
     </div>
-    <button onclick="showPlayerStats()">Xem Thống Kê</button>
-    <div class="stats"></div>
     
+    <button onclick="showPlayerStats()">Xem Thống Kê Chi Tiết</button>
+<div class="stats"></div>
+<div class="search-filter">
+    <input type="text" id="searchInput" placeholder="Tìm cầu thủ" oninput="searchPlayers()">
+    <select id="positionFilter" onchange="filterPlayersByPosition()">
+        <option value="All">Tất cả</option>
+        <option value="Thủ môn">Thủ môn</option>
+        <option value="Tiền đạo">Tiền đạo</option>
+        <option value="Hậu vệ">Hậu vệ</option>
+        <option value="Trung vệ">Trung vệ</option>
+        <option value="Tiền vệ">Tiền vệ</option>
+    </select>
+</div>
+
+
     <script src="script.js"></script>
 </body>
 </html>
