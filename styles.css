@@ -114,3 +114,21 @@ button:hover, .btn:hover {
     color: white;
 }
        
+
+.team ul, .substitutes ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+.team ul li, .substitutes ul li {
+    padding: 5px 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.team ul li:last-child, .substitutes ul li:last-child {
+    border-bottom: none;
+}
+
+.substitutes ul {
+    margin-top: 10px;
+}

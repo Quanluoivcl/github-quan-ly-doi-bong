@@ -5,52 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Football Team Manager</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="container">
-        <h1>Quản lý Cầu Thủ</h1>
+        <h2>Quản lý Cầu Thủ</h2>
 
         <form id="playerForm">
+            <label for="player-id">Số áo cầu thủ:</label>
+            <input type="text" id="player-id" placeholder="Sẽ được tạo tự động nếu bỏ trống" readonly>
             <label for="player-name">Tên cầu thủ:</label>
             <input type="text" id="player-name" placeholder="Nhập tên cầu thủ">
 
             <div class="position-container">
-                <input type="checkbox" id="goalkeeper" name="position" value="Thủ môn">
-                <label for="goalkeeper">Thủ môn</label>
+              <input type="checkbox" id="goalkeeper" name="position" value="Thủ môn">
+              <label for="goalkeeper">Thủ môn</label>
 
-                <input type="checkbox" id="forward" name="position" value="Tiền đạo">
-                <label for="forward">Tiền đạo</label>
+              <input type="checkbox" id="forward" name="position" value="Tiền đạo">
+              <label for="forward">Tiền đạo</label>
 
-                <input type="checkbox" id="defender" name="position" value="Hậu vệ">
-                <label for="defender">Hậu vệ</label>
+              <input type="checkbox" id="defender" name="position" value="Hậu vệ">
+              <label for="defender">Hậu vệ</label>
 
-                <input type="checkbox" id="midfielder" name="position" value="Trung vệ">
-                <label for="midfielder">Trung vệ</label>
+              <input type="checkbox" id="midfielder" name="position" value="Trung vệ">
+              <label for="midfielder">Trung vệ</label>
 
-                <input type="checkbox" id="winger" name="position" value="Tiền vệ">
-                <label for="winger">Tiền vệ</label>
+              <input type="checkbox" id="winger" name="position" value="Tiền vệ">
+              <label for="winger">Tiền vệ</label>
             </div>
 
             <button type="submit">Lưu Cầu Thủ</button>
-        </form>
+          </form>
+
 
         <table id="playerTable" class="player-table">
             <thead>
-                <tr>
-                    <th>STT</th>
-                    <th>Tên cầu thủ</th>
-                    <th>Vị trí</th>
-                    <th>Số áo</th>
-                    <th>Hành động</th>
-                </tr>
+              <tr>
+                <th>STT</th>
+                <th>Tên cầu thủ</th>
+                <th>Vị trí</th>
+                <th>Số áo</th>
+                <th>Hành động</th>
+              </tr>
             </thead>
             <tbody id="playerTableBody">
-                <!-- Danh sách cầu thủ sẽ được thêm vào đây -->
+              <!-- Danh sách cầu thủ sẽ được thêm vào đây -->
             </tbody>
-        </table>
+          </table>
 
-    
 
         <div class="form-group">
             <button id="generateTeams">Generate Teams</button>
@@ -60,13 +61,13 @@
 
         <div id="team-container">
             <div class="team" id="teamA">
-                <h3>Team A</h3>
+                <h3>TeamA</h3>
                 <ul class="player-list">
                     <!-- Danh sách cầu thủ Team A -->
                 </ul>
             </div>
             <div class="team" id="teamB">
-                <h3>Team B</h3>
+                <h3>TeamB</h3>
                 <ul class="player-list">
                     <!-- Danh sách cầu thủ Team B -->
                 </ul>
@@ -74,63 +75,17 @@
         </div>
 
         <div class="substitutes">
-            <h3>Dự bị</h3>
+            <h3>Substitutes</h3>
             <ul class="player-list">
                 <!-- Danh sách cầu thủ dự bị -->
             </ul>
         </div>
-    </div>
 
-    <button onclick="showPlayerStats()">Xem Thống Kê Chi Tiết</button>
+    </div>
+    <button onclick="showPlayerStats()">Xem Thống Kê</button>
     <div class="stats"></div>
+    
     <div class="search-filter">
-<<<<<<< HEAD
-        <input type="text" id="searchInput" placeholder="Tìm cầu thủ" oninput="searchPlayers()">
-        <select id="positionFilter" onchange="filterPlayersByPosition()">
-            <option value="All">Tất cả</option>
-            <option value="Thủ môn">Thủ môn</option>
-            <option value="Tiền đạo">Tiền đạo</option>
-            <option value="Hậu vệ">Hậu vệ</option>
-            <option value="Trung vệ">Trung vệ</option>
-            <option value="Tiền vệ">Tiền vệ</option>
-        </select>
-    </div>
-
-    <script>
-        function generateRandomShirtNumber() {
-            return Math.floor(Math.random() * 20) + 1; // Tạo số áo từ 1 đến 99
-        }
-
-        document.getElementById("playerForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            const playerName = document.getElementById("player-name").value.trim();
-            const positions = Array.from(document.querySelectorAll('input[name="position"]:checked')).map(input => input.value);
-            const shirtNumber = generateRandomShirtNumber();
-
-            if (playerName && positions.length) {
-                const playerTableBody = document.getElementById("playerTableBody");
-                const newRow = document.createElement("tr");
-                newRow.innerHTML = `
-                    <td>${playerTableBody.children.length + 1}</td>
-                    <td>${playerName}</td>
-                    <td>${positions.join(", ")}</td>
-                    <td>${shirtNumber}</td>
-                    <td>
-                        <button>Sửa</button>
-                        <button>Xóa</button>
-                    </td>
-                `;
-                playerTableBody.appendChild(newRow);
-
-                // Reset form
-                document.getElementById("player-name").value = "";
-                document.querySelectorAll('input[name="position"]').forEach(input => input.checked = false);
-            } else {
-                alert("Vui lòng nhập tên và chọn vị trí cầu thủ!");
-            }
-        });
-    </script>
-=======
     <input type="text" id="searchInput" placeholder="Tìm cầu thủ" oninput="searchPlayers()">
     <select id="positionFilter" onchange="filterPlayersByPosition()">
         <option value="All">Tất cả</option>
@@ -141,8 +96,6 @@
         <option value="Tiền vệ">Tiền vệ</option>
     </select>
 </div>
-
     <script src="script.js"></script>
->>>>>>> cb254f310461f7af308034c14b95e686f18f6038
 </body>
 </html>
