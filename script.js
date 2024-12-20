@@ -66,7 +66,7 @@ function savePlayer() {
 
 
 
-// Hàm hiển thị danh sách cầu thủ
+// Hàm hiển thị danh sách cầu thủ 
 function renderPlayerList() {
   console.log("Danh sách cầu thủ được lọc:", players); // Kiểm tra dữ liệu lọc
   const playerTableBody = document.getElementById("playerTableBody");
@@ -116,34 +116,93 @@ function deletePlayer(id) {
   console.log("Danh sách cầu thủ hiện tại:", JSON.parse(localStorage.getItem("players")));
 }
 
-// Hàm bắt đầu sửa thông tin cầu thủ
+// Hàm hiển thị thông tin cầu thủ vào form để chỉnh sửa
 function startEditPlayer(id) {
   const storedPlayers = JSON.parse(localStorage.getItem("players")) || [];
   const playerToEdit = storedPlayers.find(player => player.id == id);
 
   if (playerToEdit) {
+    // Điền thông tin cầu thủ vào form
     document.getElementById("player-id").value = playerToEdit.id;
     document.getElementById("player-name").value = playerToEdit.name;
     document.querySelectorAll('input[name="position"]').forEach(input => {
       input.checked = playerToEdit.positions.includes(input.value);
     });
+
+    // Lưu ID của cầu thủ đang chỉnh sửa để cập nhật sau
+    document.getElementById("playerForm").setAttribute("data-edit-id", id);
   } else {
     alert("Không tìm thấy cầu thủ để sửa!");
   }
 }
 
-l;
+// Hàm lưu thông tin cầu thủ sau khi chỉnh sửa
+function saveEditedPlayer() {
+  const editId = document.getElementById("playerForm").getAttribute("data-edit-id");
+  if (!editId) {
+    savePlayer(); // Nếu không phải đang chỉnh sửa, gọi hàm thêm mới
+    return;
+  }
+
+  const storedPlayers = JSON.parse(localStorage.getItem("players")) || [];
+  const playerIndex = storedPlayers.findIndex(player => player.id == editId);
+
+  if (playerIndex === -1) {
+    alert("Không tìm thấy cầu thủ để cập nhật!");
+    return;
+  }
+
+  // Lấy dữ liệu từ form
+  const nameInput = document.getElementById("player-name").value.trim();
+  const positions = Array.from(document.querySelectorAll('input[name="position"]:checked')).map(input => input.value);
+
+  if (nameInput === "") {
+    alert("Vui lòng nhập tên cầu thủ!");
+    return;
+  }
+
+  if (positions.length === 0) {
+    alert("Vui lòng chọn ít nhất một vị trí cầu thủ!");
+    return;
+  }
+
+  // Kiểm tra trùng lặp tên và ID khi chỉnh sửa
+  const isDuplicateName = storedPlayers.some((player, index) => index !== playerIndex && player.name.toLowerCase() === nameInput.toLowerCase());
+  if (isDuplicateName) {
+    alert("Tên cầu thủ đã tồn tại. Vui lòng nhập tên khác!");
+    return;
+  }
+
+
+  
+  // Cập nhật thông tin cầu thủ
+  storedPlayers[playerIndex].name = nameInput;
+  storedPlayers[playerIndex].positions = positions;
+
+  localStorage.setItem("players", JSON.stringify(storedPlayers));
+
+  // Reset form
+  document.getElementById("playerForm").removeAttribute("data-edit-id");
+  document.getElementById("player-id").value = "";
+  document.getElementById("player-name").value = "";
+  document.querySelectorAll('input[name="position"]').forEach(input => input.checked = false);
+
+  renderPlayerList();
+  alert("Cập nhật thông tin cầu thủ thành công!");
+}
+
+
+
+// Hàm sửa để sử dụng chức năng startEditPlayer
+function editPlayer(id) {
+  startEditPlayer(id);
+}
+
 // Hàm sửa thông tin cầu thủ
 function editPlayer(id) {
   const storedPlayers = JSON.parse(localStorage.getItem("players")) || [];
   const playerToEdit = storedPlayers.find(player => player.id === id);
 
-  // Điền thông tin cầu thủ vào form sửa
-  document.getElementById("player-id").value = playerToEdit.id;
-  document.getElementById("player-name").value = playerToEdit.name;
-  document.querySelectorAll('input[name="position"]').forEach(input => {
-    input.checked = playerToEdit.positions.includes(input.value);
-  });
 
   // Xóa cầu thủ cũ tạm thời nhưng lưu danh sách lại
   const updatedPlayers = storedPlayers.filter(player => player.id !== id);
@@ -155,11 +214,6 @@ function editPlayer(id) {
   console.log("Danh sách cầu thủ hiện tại:", JSON.parse(localStorage.getItem("players")));
 
 }
-
-
-
-
-
 
 
 // Hàm thêm dữ liệu thống kê cho cầu thủ
@@ -194,18 +248,7 @@ function validatePlayer() {
   const nameInput = document.getElementById("player-name").value.trim(); // Loại bỏ khoảng trắng thừa
   const positionChecked = document.querySelectorAll('input[name="position"]:checked');
 
-  // Kiểm tra tên cầu thủ có được nhập không
-  if (nameInput === "") {
-      alert("Vui lòng nhập tên cầu thủ!");
-      return false;
-  }
-
-  // Kiểm tra vị trí có được chọn không
-  if (positionChecked.length === 0) {
-      alert("Vui lòng chọn vị trí cầu thủ!");
-      return false;
-  }
-  return true;
+  
 }
 
 function searchPlayers() {
