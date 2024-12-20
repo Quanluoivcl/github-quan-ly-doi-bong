@@ -85,3 +85,32 @@ button:hover, .btn:hover {
     font-weight: bold;
     color: #e74
 }
+
+
+#playerTable {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#playerTable th, #playerTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#playerTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#playerTable tr:hover {
+    background-color: #ddd;
+}
+
+#playerTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+       
