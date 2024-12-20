@@ -65,7 +65,6 @@ function savePlayer() {
   
   
   
-  
 
 // Hàm hiển thị danh sách cầu thủ
 function renderPlayerList() {
@@ -161,7 +160,27 @@ function updatePlayerStats(id, goals = 0, assists = 0) {
     }
 }
 
+<<<<<<< HEAD
 // Hàm hiển thị thống kê chi tiết
+=======
+
+
+  // Hàm thêm dữ liệu thống kê cho cầu thủ
+function updatePlayerStats(id, goals = 0, assists = 0) {
+    const storedPlayers = JSON.parse(localStorage.getItem("players")) || [];
+    const player = storedPlayers.find(player => player.id === id);
+
+    if (player) {
+        player.stats = player.stats || { appearances: 0, goals: 0, assists: 0 };
+        player.stats.appearances += 1; // Tăng số lần ra sân
+        player.stats.goals += goals;  // Cập nhật số bàn thắng
+        player.stats.assists += assists; // Cập nhật số kiến tạo
+        localStorage.setItem("players", JSON.stringify(storedPlayers));
+    }
+}
+
+ // Hàm hiển thị thống kê chi tiết
+>>>>>>> cb254f310461f7af308034c14b95e686f18f6038
 function showPlayerStats() {
     const statsDiv = document.querySelector(".stats");
     const storedPlayers = JSON.parse(localStorage.getItem("players")) || [];
@@ -247,5 +266,8 @@ function renderFilteredPlayers(players) {
 
 
 console.log("Dữ liệu cầu thủ trong Local Storage:", JSON.parse(localStorage.getItem("players")));
+<<<<<<< HEAD
 
+=======
+>>>>>>> cb254f310461f7af308034c14b95e686f18f6038
 
